@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34601.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MountController", "MountController\MountController.csproj", "{51EB78C9-D2CA-484B-AA7C-8FD9EAFD14E7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{51EB78C9-D2CA-484B-AA7C-8FD9EAFD14E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51EB78C9-D2CA-484B-AA7C-8FD9EAFD14E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51EB78C9-D2CA-484B-AA7C-8FD9EAFD14E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51EB78C9-D2CA-484B-AA7C-8FD9EAFD14E7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2B6CB95C-E1BA-4161-9848-A6385AF86559}
+	EndGlobalSection
+EndGlobal
