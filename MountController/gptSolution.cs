@@ -92,8 +92,9 @@ namespace MountController {
 				// Get current right ascension and declination
 				currentRA = telescope.RightAscension;
 				currentDec = telescope.Declination;
-			}
 
+				Console.WriteLine($"Reported current RA/Dec: {currentRA}, {currentDec} {telescope.SideOfPier}");
+			}
 
 			//  Set initial params
 			double centerX = currentRA; // Center in current RA
@@ -103,12 +104,19 @@ namespace MountController {
 			try {
 				// Slew around the circle
 				while(angle < 360) {
-					// Calculate new position on the circle
-					double newRA  = centerX + (_circleRadius * Math.Cos(angle * Math.PI / 180));
+					// Calculate new position on the circle.
+					//  RA's radius is / 15° because RA 24 hours = 360 degree / 15 degree per hour
+					double newRA  = centerX + ((_circleRadius / 15) * Math.Cos(angle * Math.PI / 180));
 					double newDec = centerY + (_circleRadius * Math.Sin(angle * Math.PI / 180));
 
 					//  Do NOT pier flip if we hit the edge case.  Just truncate RA to a small value
 					newRA = newRA < 0 ? 0.1 : newRA;
+
+					////  Fix DEC =90° edge case (just on my mount's implementation?)
+					//telescope.SideOfPier = newDec >= 90.0 ? ASCOM.Common.DeviceInterfaces.PointingState.ThroughThePole :
+					//	ASCOM.Common.DeviceInterfaces.PointingState.Normal;
+
+					newDec = newDec >= 90.0 ? 90.0 - (newDec - 90.0) : newDec;
 
 					// Slew to the new position
 					//if(telescope.CanMoveAxis(ASCOM.Common.DeviceInterfaces.TelescopeAxis.Primary) &&
@@ -117,10 +125,10 @@ namespace MountController {
 					//	Console.WriteLine("Can move axes");
 					//}
 					//else {
-						telescope.SlewToCoordinates(newRA, newDec);
+					telescope.SlewToCoordinates(newRA, newDec);
 					//}
 
-					Console.WriteLine($"{newRA}, {newDec}");
+					Console.WriteLine($"{newRA}, {newDec} {telescope.SideOfPier}");
 
 					// Wait for the slew to complete (adjust sleep time as needed)
 					Thread.Sleep(_sleepTime);
